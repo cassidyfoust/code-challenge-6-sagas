@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Oswald', sans-serif;
+  padding-bottom: 50px;
 }
 
 .App-header {
@@ -54,3 +55,15 @@ th {
     background-color: mediumturquoise;
 }
 
+.transferBtn {
+  color: black;
+    background-color: mediumturquoise;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+}
+
+.transfer-column {
+  width: 80px;
+  text-align: center;
+}

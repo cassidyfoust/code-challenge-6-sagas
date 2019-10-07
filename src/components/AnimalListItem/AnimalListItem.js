@@ -9,6 +9,7 @@ class AnimalListItem extends Component {
             <tr>
                 <td>{this.props.classData.species_name}</td>
                 <td>{this.props.classData.class_name}</td>
+                <td className="transfer-column"><button className="transferBtn">Transfer</button></td>
             </tr>
         );
     }
