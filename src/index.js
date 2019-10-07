@@ -15,6 +15,7 @@ import axios from 'axios';
 // Your saga should listen for the action type of `GET_ZOO_ANIMALS`
 function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', getAnimals);
+    yield takeEvery('TRANSFER_ANIMAL', transferAnimal);
     // YOUR CODE HERE
 
 }
@@ -26,6 +27,17 @@ function* getAnimals() {
         yield put({ type: 'SET_ZOO_ANIMALS', payload: response.data })
     } catch (error) {
         console.log('error while fetching zoo animals:', error)
+    }
+}
+
+// generator function for axios delete request
+
+function* transferAnimal(action) {
+    try {
+        const response = yield axios.delete(`/zoo/${action.payload}`);
+        console.log('response:', response);
+    } catch (error) {
+        console.log('error while transferring zoo animals:', error)
     }
 }
 
