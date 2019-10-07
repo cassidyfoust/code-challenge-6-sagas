@@ -62,7 +62,6 @@ class NewAnimalForm extends Component {
     render() {
         return (
            <>
-           {JSON.stringify(this.state.animalToAdd)}
                 <p>Species:</p> 
                 <div>
            <input className="select-css" onChange={(event) => {this.handleChange('species', event)}}></input>
