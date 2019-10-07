@@ -16,6 +16,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', getAnimals);
     yield takeEvery('TRANSFER_ANIMAL', transferAnimal);
+    yield takeEvery('GET_CLASSES', getClasses);
     // YOUR CODE HERE
 
 }
@@ -27,6 +28,16 @@ function* getAnimals() {
         yield put({ type: 'SET_ZOO_ANIMALS', payload: response.data })
     } catch (error) {
         console.log('error while fetching zoo animals:', error)
+    }
+}
+
+function* getClasses() {
+    try {
+        const response = yield axios.get('/classes');
+        console.log('response:', response)
+        yield put({ type: 'SET_CLASSES', payload: response.data })
+    } catch (error) {
+        console.log('error while fetching zoo classes:', error)
     }
 }
 
@@ -54,10 +65,20 @@ const zooAnimals = (state = [], action) => {
     }
 }
 
+const animalClasses = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_CLASSES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         zooAnimals,
+        animalClasses
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
