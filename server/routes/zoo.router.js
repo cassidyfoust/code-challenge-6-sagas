@@ -14,6 +14,20 @@ JOIN "class"
         });
 });
 
+router.post('/', (req, res) => {
+    let species = req.body.species
+    let classId = req.body.classId
+    const queryText = `INSERT into "species" ("species_name", "class_id") VALUES ($1, $2)`
+    const queryValues = [species, classId]
+    console.log(queryText, queryValues)
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing ADD ANIMAL query', err);
+            res.sendStatus(500);
+        });
+})
+
 router.delete('/:id', (req, res) => {
     const queryText = `DELETE from "species" WHERE "id" = $1;`
     const queryValues = [req.params.id];

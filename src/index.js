@@ -17,8 +17,19 @@ function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', getAnimals);
     yield takeEvery('TRANSFER_ANIMAL', transferAnimal);
     yield takeEvery('GET_CLASSES', getClasses);
+    yield takeEvery('ADD_ANIMAL', addAnimal);
     // YOUR CODE HERE
 
+}
+
+function* addAnimal(action) {
+    try {
+        const response = yield axios.post('/zoo', action.payload);
+        console.log('response:', response)
+        yield put({ type: 'GET_ZOO_ANIMALS'})
+    } catch (error) {
+        console.log('error while fetching zoo animals:', error)
+    }
 }
 
 function* getAnimals() {
@@ -47,6 +58,7 @@ function* transferAnimal(action) {
     try {
         const response = yield axios.delete(`/zoo/${action.payload}`);
         console.log('response:', response);
+        yield put({ type: 'GET_ZOO_ANIMALS' })
     } catch (error) {
         console.log('error while transferring zoo animals:', error)
     }
